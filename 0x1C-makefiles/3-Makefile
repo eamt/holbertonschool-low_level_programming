@@ -1,38 +1,13 @@
-SRC=$(wildcard *.c)
 CC=gcc
-OBJ=$(SRC:%.c=%.o)
+SRC=main.c holberton.c
+OBJ=$(SRC:.c=.o)
 NAME=holberton
-RM=-rm
-
-%.o: %.c
-	$(CC) -c $< -o $@
-
+RM=rm -f
 all: $(OBJ)
-	$(CC) $(OBJ) -o $(NAME)
-
+	$(CC) $(SRC) -o $(NAME)
 clean:
-ifneq ($(strip $(wildcard *~)),)
-	$(RM) $(wildcard *~)
-endif
-ifneq ($(strip $(wildcard $(NAME))),)
-	$(RM) $(NAME)
-endif
-
-fclean:
-ifneq ($(strip $(wildcard *~)),)
-	$(RM) $(wildcard *~)
-endif
-ifneq ($(strip $(wildcard $(NAME))),)
-	$(RM) $(NAME)
-endif
-ifneq ($(strip $(wildcard *.o)),)
-	$(RM) $(wildcard *.o)
-endif
-
-
+	$(RM) *~ $(NAME)
 oclean:
-ifneq ($(strip $(wildcard *.o)),)
-	$(RM) $(wildcard *.o)
-endif
-
-re: oclean all
+	$(RM) $(OBJ)
+fclean: clean oclean
+re:oclean all
